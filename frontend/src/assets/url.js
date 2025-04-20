@@ -1,1 +1,1 @@
-export const url = 'http://localhost:3000/api/'
+export const url = 'https://hyperlocal-store-9sdn.onrender.com/api/'
