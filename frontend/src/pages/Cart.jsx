@@ -7,9 +7,9 @@ const Cart = () => {
 
   const [total, setTotal] = React.useState(0);
 
-  const handleRemoveFromCart = async (productId) => {
+  const handleRemoveFromCart =  async (productId) => {
     
-    removeFromCart(productId);
+   await removeFromCart(productId);
     window.location.reload();
    }
 

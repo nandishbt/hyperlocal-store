@@ -15,7 +15,7 @@ const ProductCard = ({productName = 'Loading..',productPrice = 50,productId}) =>
       productId: productId,
       quantity: quantity,
     };
-   addToCart(items);
+   await addToCart(items);
 
    toast.success("Added to cart successfully")
 
