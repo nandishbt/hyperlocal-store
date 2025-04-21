@@ -3,7 +3,7 @@ import axios from 'axios'
 import { url } from '../assets/url'
 import { useNavigate } from 'react-router-dom'
 import { storeContext } from '../context/StoreContext'
-
+import { toast } from 'react-toastify'
 const Login = () => {
 
   const navigate = useNavigate()
@@ -24,12 +24,16 @@ const Login = () => {
     if(isLoggedIn == 'SignIn'){
       try {
         const response = await axios.post(`${url}user/login`, data)
-        console.log(response.data);
+        
+
+        const msg = await response.data.message
+        toast.success(msg)
+        
         if(response.data.success){
           localStorage.setItem('token', response.data.data.token)
           setToken(response.data.data.token)
           navigate('/')
-          window.location.reload()
+          // window.location.reload()
         }
         setdata({
           email: "",
@@ -40,18 +44,22 @@ const Login = () => {
         })
       
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.message);
+        const msg = await error.response.data.message
+        toast.error(msg)
         
       }
     }
     else if(isLoggedIn == 'SignUp'){
       try {
         const response = await axios.post(`${url}user/register`, data)
-        console.log(response.data);
+        // console.log(response.data);
+        const msg = await response.data.message
+        await toast.success(msg)
         if(response.data.success){
           setIsLoggedIn('SignIn')
         }
-        window.location.reload()
+        // window.location.reload()
         setdata({
           email: "",
           password: "",
@@ -63,6 +71,8 @@ const Login = () => {
         
       } catch (error) {
         console.log(error);
+        const msg = await error.response.data.message
+        toast.error(msg)
         setdata({
           email: "",
           password: "",
@@ -81,7 +91,7 @@ const Login = () => {
       fullname:""
     })
 
-    window.location.reload()
+    // window.location.reload()
    
 
 
