@@ -5,12 +5,22 @@ import { images } from "../assets/imgs";
 
 const ProductCard = ({productName = 'Loading..',productPrice = 50,productId}) => {
 
-  const{addToCart,removeFromCart} = useContext(storeContext)
+
+
+  const{addToCart,removeFromCart,token} = useContext(storeContext)
 
   const [quantity, setQuantity] = useState(1);
 
 
   const handleAddToCart = async (productId,quantity) => {
+
+    if(!token) {
+      toast.error("Please login to add items to cart")
+      return
+    }
+
+    
+
     const items = {
       productId: productId,
       quantity: quantity,
